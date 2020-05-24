@@ -11,8 +11,8 @@
   <ul>
     <li>タスク名:<%= @task.theme %></li>
     <li>タスク内容:<%= @task.content %></li>
-    <li>優先順位:<%= priority_description %></li>
-    <li>ステータス:<%= status_description %></li>
+    <li>優先順位:<%= priority_labels.key(@task.priority) %></li>
+    <li>ステータス:<%= status_labels.key(@task.status) %></li>
     <li>期限:<%= @task.time_limit %></li>
   </ul>
   <%= f.submit %>

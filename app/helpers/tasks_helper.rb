@@ -7,23 +7,12 @@ module TasksHelper
     end
   end
 
-  def priority_description
-    if @task.priority == 1
-      "低い"
-    elsif @task.priority == 2
-      "普通"
-    else
-      "高い"
-    end
+  def priority_labels
+    { 低い: 1,  普通: 2, 高い: 3 }
   end
 
-    def status_description
-      if @task.status == 1
-        "未着手"
-      elsif @task.status == 2
-        "普通"
-      else
-        "完了"
-      end
-    end
+  def status_labels
+    { 未着手: 1, 着手: 2, 完了: 3 }
+  end
+
 end

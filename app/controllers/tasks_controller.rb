@@ -3,8 +3,6 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all
-    @priority_labels = { 低い: 1,  普通: 2, 高い: 3 }
-    @status_labels = { 未着手: 1, 着手: 2, 完了: 3 }
   end
 
   def new

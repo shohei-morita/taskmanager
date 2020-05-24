@@ -1,24 +1,37 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## user
+|カラム|データ型|用途|
+|:---|:---|:---|
+|name|string|氏名入力|
+|:---|:---|:---|
+|email|string|メールアドレス入力|
+|:---|:---|:---|
+|password|string|パスワード入力|
 
-Things you may want to cover:
+## task
+|カラム|データ型|用途|
+|:---|:---|:---|
+|theme|string|タスク概要入力|
+|:---|:---|:---|
+|content|text|タスク内容入力|
+|:---|:---|:---|
+|priority|integer|優先順位を1~3で表示|
+|:---|:---|:---|
+|status|integer|状況を1~3で表示|
+|:---|:---|:---|
+|time_limit|date|完了日選択|
+|:---|:---|:---|
+|user_id|integer|Foreign Key|
 
-* Ruby version
+## task_label
+|カラム|データ型|用途|
+|:---|:---|:---|
+|task_id|integer|Foreign Key|
+|:---|:---|:---|
+|label_id|integer|Foreign Key|
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## task_label
+|カラム|データ型|用途|
+|:---|:---|:---|
+|category|string|ラベル入力|

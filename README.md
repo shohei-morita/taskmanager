@@ -23,7 +23,7 @@
 |task_id|integer|Foreign Key|
 |label_id|integer|Foreign Key|
 
-## task_label
+## label
 |カラム|データ型|用途|
 | --- | --- | --- |
 |category|string|ラベル入力|

@@ -3,6 +3,8 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all
+    @priority_labels = { 低い: 1,  普通: 2, 高い: 3 }
+    @status_labels = { 未着手: 1, 着手: 2, 完了: 3 }
   end
 
   def new
@@ -51,7 +53,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:theme, :content)
+    params.require(:task).permit(:theme, :content, :priority, :status, :time_limit)
   end
 
   def set_task

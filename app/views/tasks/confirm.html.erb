@@ -5,9 +5,15 @@
 <%= form_with(model: @task, local: true) do |f| %>
   <%= f.hidden_field :theme %>
   <%= f.hidden_field :content %>
+  <%= f.hidden_field :priority %>
+  <%= f.hidden_field :status %>
+  <%= f.hidden_field :time_limit %>
   <ul>
-    <li>タスク名<%= @task.theme %></li>
-    <li>タスク内容<%= @task.content %></li>
+    <li>タスク名:<%= @task.theme %></li>
+    <li>タスク内容:<%= @task.content %></li>
+    <li>優先順位:<%= priority_description %></li>
+    <li>ステータス:<%= status_description %></li>
+    <li>期限:<%= @task.time_limit %></li>
   </ul>
   <%= f.submit %>
   <%= f.submit "back", name: "back" %>

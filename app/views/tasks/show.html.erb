@@ -1,7 +1,10 @@
 <h1>タスク詳細</h1>
 
-<p>テーマ:<%= @task.theme %></p>
-<p>内容:<%= @task.content %></p>
 
+<p>タスク名:<%= @task.theme %></p>
+<p>タスク内容:<%= @task.content %></p>
+<p>優先順位:<%= priority_description %></p>
+<p>ステータス:<%= status_description %></p>
+<p>期限:<%= @task.time_limit %></p>
 <%= link_to "edit", edit_task_path(@task.id) %>|
 <%= link_to "一覧", tasks_path %>

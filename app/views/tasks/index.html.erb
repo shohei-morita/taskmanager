@@ -6,6 +6,9 @@
     <tr>
       <th>テーマ</th>
       <th>内容</th>
+      <th>優先順位</th>
+      <th>ステータス</th>
+      <th>期限</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +16,9 @@
     <tr>
       <td><%= task.theme %></td>
       <td><%= task.content %></td>
+      <td><%= @priority_labels.key(task.priority) %></td>
+      <td><%= @status_labels.key(task.status) %></td>
+      <td><%= p task.time_limit %></td>
       <td><%= link_to "詳細", task_path(task.id) %></td>
       <td><%= link_to "編集", edit_task_path(task.id) %></td>
       <td><%= link_to "削除", task_path(task.id), method: :delete, data: { confirm: "本当に削除しますか" } %></td>

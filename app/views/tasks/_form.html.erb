@@ -1,0 +1,19 @@
+<%= form_with(model: @task, local: true, url: choose_new_or_edit) do |f| %>
+
+  <% if @task.errors.any? %>
+    <ul>
+      <% @task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <ul>
+    <li><%= f.label :"タスク名" %></li>
+    <li><%= f.text_field :theme %></li>
+    <li><%= f.label :"タスク内容" %></li>
+    <li><%= f.text_area :content %></li>
+  </ul>
+    <%= f.submit %>
+    <%= link_to "back", tasks_path %>
+<% end %>

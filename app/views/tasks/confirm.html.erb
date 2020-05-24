@@ -1,0 +1,14 @@
+<h1>タスク確認</h1>
+
+<p>以下の内容でタスクを登録しますか？</p>
+
+<%= form_with(model: @task, local: true) do |f| %>
+  <%= f.hidden_field :theme %>
+  <%= f.hidden_field :content %>
+  <ul>
+    <li>タスク名<%= @task.theme %></li>
+    <li>タスク内容<%= @task.content %></li>
+  </ul>
+  <%= f.submit %>
+  <%= f.submit "back", name: "back" %>
+<% end %>

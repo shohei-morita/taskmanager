@@ -10,16 +10,16 @@
 
   <ul>
     <li><%= f.label :"タスク名" %></li>
-    <li><%= f.text_field :theme %></li>
-    <li><%= f.label :"タスク内容" %></li>
+    <li><%= f.text_field :theme, id: "task_theme" %></li>
+    <li><%= f.label :"タスク内容", id: "task_content" %></li>
     <li><%= f.text_area :content %></li>
-    <li><%= f.label :"優先順位"%></li>
+    <li><%= f.label :"優先順位" %></li>
     <li><%= f.select :priority, { 低い: 1,　普通: 2, 高い: 1 } %></li>
     <li><%= f.label :"ステータス" %></li>
     <li><%= f.select :status, { 未着手: 1, 着手: 2, 完了: 3 } %></li>
     <li><%= f.label :"期限" %></li>
     <li><%= f.date_field :time_limit %></li>
   </ul>
-    <%= f.submit %>
+    <%= f.submit "post", id: "task_post" %>
     <%= link_to "back", tasks_path %>
 <% end %>

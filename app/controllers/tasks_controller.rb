@@ -11,7 +11,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    if params[:back]
+    if status_back
       render :new
     elsif @task.save
       redirect_to tasks_path
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    if params[:back]
+    if status_back
       redirect_to tasks_path
     elsif @task.update(task_params)
       redirect_to tasks_path
@@ -44,7 +44,7 @@ class TasksController < ApplicationController
 
   def confirm
     @task = Task.new(task_params)
-    if params[:back]
+    if status_back
       render :new
     end
   end
@@ -56,5 +56,9 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+
+  def status_back
+    params[:back]
   end
 end

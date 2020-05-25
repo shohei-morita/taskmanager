@@ -1,14 +1,14 @@
-<h1>タスク一覧</h1>
+<h1><%= t('view.index_title') %></h1>
 <%= link_to "タスク登録", new_task_path %>
 
 <table>
   <thead>
     <tr>
-      <th>テーマ</th>
-      <th>内容</th>
-      <th>優先順位</th>
-      <th>ステータス</th>
-      <th>期限</th>
+      <th><%= t('view.theme') %></th>
+      <th><%= t('view.content') %></th>
+      <th><%= t('view.priority') %></th>
+      <th><%= t('view.status') %></th>
+      <th><%= t('view.time_limit') %></th>
     </tr>
   </thead>
   <tbody>

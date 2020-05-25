@@ -1,10 +1,10 @@
-<h1>タスク詳細</h1>
+<h1><%= t('view.show_title') %></h1>
 
 
-<p>タスク名:<%= @task.theme %></p>
-<p>タスク内容:<%= @task.content %></p>
-<p>優先順位:<%= priority_labels.key(@task.priority) %></p>
-<p>ステータス:<%= status_labels.key(@task.status) %></p>
-<p>期限:<%= @task.time_limit %></p>
+<p><%= t('view.theme') %>:<%= @task.theme %></p>
+<p><%= t('view.content') %>:<%= @task.content %></p>
+<p><%= t('view.priority') %>:<%= priority_labels.key(@task.priority) %></p>
+<p><%= t('view.status') %>:<%= status_labels.key(@task.status) %></p>
+<p><%= t('view.time_limit') %>:<%= @task.time_limit %></p>
 <%= link_to "edit", edit_task_path(@task.id) %>|
 <%= link_to "一覧", tasks_path %>

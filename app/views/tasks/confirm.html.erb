@@ -1,6 +1,6 @@
-<h1>タスク確認</h1>
+<h1><%= t('view.confirm_title') %></h1>
 
-<p>以下の内容でタスクを登録しますか？</p>
+<p><%= t('view.confirm_text') %></p>
 
 <%= form_with(model: @task, local: true) do |f| %>
   <%= f.hidden_field :theme %>
@@ -9,11 +9,11 @@
   <%= f.hidden_field :status %>
   <%= f.hidden_field :time_limit %>
   <ul>
-    <li>タスク名:<%= @task.theme %></li>
-    <li>タスク内容:<%= @task.content %></li>
-    <li>優先順位:<%= priority_labels.key(@task.priority) %></li>
-    <li>ステータス:<%= status_labels.key(@task.status) %></li>
-    <li>期限:<%= @task.time_limit %></li>
+    <li><%= t('view.theme') %>:<%= @task.theme %></li>
+    <li><%= t('view.content') %>:<%= @task.content %></li>
+    <li><%= t('view.priority') %>:<%= priority_labels.key(@task.priority) %></li>
+    <li><%= t('view.status') %>:<%= status_labels.key(@task.status) %></li>
+    <li><%= t('view.time_limit') %>:<%= @task.time_limit %></li>
   </ul>
   <%= f.submit %>
   <%= f.submit "back", name: "back" %>

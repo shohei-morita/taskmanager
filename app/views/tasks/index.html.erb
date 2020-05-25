@@ -9,6 +9,8 @@
       <th><%= t('view.priority') %></th>
       <th><%= t('view.status') %></th>
       <th><%= t('view.time_limit') %></th>
+      <th><%= t('view.post_time') %></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +20,8 @@
       <td><%= task.content %></td>
       <td><%= priority_labels.key(task.priority) %></td>
       <td><%= status_labels.key(task.status) %></td>
-      <td><%= p task.time_limit %></td>
+      <td><%= task.time_limit %></td>
+      <td><%= task.created_at.strftime("%Y/%m/%d") %></td>
       <td><%= link_to "詳細", task_path(task.id) %></td>
       <td><%= link_to "編集", edit_task_path(task.id) %></td>
       <td><%= link_to "削除", task_path(task.id), method: :delete, data: { confirm: "本当に削除しますか" } %></td>

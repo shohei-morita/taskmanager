@@ -1,6 +1,7 @@
 <%= form_with(model: @task, local: true, url: choose_new_or_edit) do |f| %>
 
   <% if @task.errors.any? %>
+    <h2><%= @task.errors.count %>件のエラーがあります。</h2>
     <ul>
       <% @task.errors.full_messages.each do |message| %>
         <li><%= message %></li>

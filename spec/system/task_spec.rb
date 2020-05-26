@@ -1,13 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
+  before do
+    @task = create(:task)
+    @task = create(:second_task)
+  end
 
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示される' do
-        task = create(:task, theme: 'task')
         visit tasks_path
-        expect(page).to have_content 'task'
+        expect(page).to have_content 'test_theme1'
+      end
+    end
+    context '複数のタスクを作成した場合' do
+      it 'タスクが作成日時の降順に並んでいる' do
+        visit tasks_path
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'test_theme2'
+        expect(task_list[1]).to have_content 'test_theme1'
       end
     end
   end
@@ -27,10 +38,9 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe 'タスク詳細画面' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示されたページに遷移する' do
-         task = create(:task, theme: "task")
          visit tasks_path
-         click_on '詳細'
-         expect(current_path).to eq task_path(task.id)
+         click_on '詳細', match: :first
+         expect(current_path).to eq task_path(@task.id)
      end
     end
   end

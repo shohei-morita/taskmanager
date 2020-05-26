@@ -16,7 +16,7 @@
   <tbody>
     <% @tasks.each do |task| %>
     <tr>
-      <td><%= task.theme %></td>
+      <td class="task_row" ><%= task.theme %></td>
       <td><%= task.content %></td>
       <td><%= priority_labels.key(task.priority) %></td>
       <td><%= status_labels.key(task.status) %></td>

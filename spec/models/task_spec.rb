@@ -9,7 +9,7 @@ RSpec.describe 'タスク管理機能', type: :model do
     task = Task.new(theme: '失敗テスト', content: '')
     expect(task).not_to be_valid
   end
-  it 'titleとcontetnに内容が記載されていればバリデーションが通る' do
+  it 'titleとcontetに内容が記載されていればバリデーションが通る' do
     task = Task.new(theme: '通過テスト', content: '通過テスト')
     expect(task).to be_valid
   end

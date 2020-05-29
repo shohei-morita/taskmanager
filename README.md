@@ -5,10 +5,12 @@
 * Rails 5.2.4.3
 
 ## Herokuへのデプロイ手順
-1. git commitコマンドを使い、コミット
-2. heroku createコマンドを使い、Herokuに新規プリケーションを作成
-3. git push heroku masterコマンドを使い、Herokuにデプロイ
-4. heroku run rails db:migrateコマンドを使い、データベースに移行
+1. heroku loginコマンドで、Herokuにログイン
+2. heroku create <アプリ名※省略化>コマンドを使い、Herokuに新規プリケーションを作成
+ * 次の形式のURLが設定される「https://*******.herokuapp.com/」 ※ アプリ名を省略した場合は、********部分は自動的に設定される。
+ * 上記URLがアプリのURL及Gitリポジトリとなる。
+3. git push heroku masterコマンドを使い、Herokuにpushすることでデプロイ
+4. heroku run rails db:migrateコマンドを使い、Heroku上にデータベースを作成
 
 ## テーブルの構想
 ### user

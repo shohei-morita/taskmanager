@@ -9,7 +9,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示される' do
-        visit tasks_path
+        visit visit_with_http_auth tasks_path
         expect(page).to have_content 'test_theme1'
       end
     end
@@ -43,6 +43,13 @@ RSpec.describe 'タスク管理機能', type: :system do
          expect(current_path).to eq task_path(@task.id)
      end
     end
+  end
+
+  private
+  def visit_with_http_auth(path)
+    username = 'guest_user'
+    password = 'guest_password'
+    visit "http://#{username}:#{password}@#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{path}"
   end
 
 end

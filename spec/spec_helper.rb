@@ -14,7 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  config.before(:each, typ: :system) do
+  config.before(:each, type: :system) do
     driven_by(:selenium_chrome)
   end
   # rspec-expectations config goes here. You can use an alternate

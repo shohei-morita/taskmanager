@@ -1,0 +1,14 @@
+ja:
+  view:
+    theme: タスク概要
+    content: タスク詳細
+    priority: 優先順位
+    status: ステータス
+    time_limit: 期限
+    post_time: 登録日
+    confirm_title: タスク確認
+    confirm_text: 以下の内容でタスクを登録しますか？
+    edit_title: タスクを編集する
+    index_title: タスク一覧
+    new_title: タスクを登録する
+    show_title: タスク詳細

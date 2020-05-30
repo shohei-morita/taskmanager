@@ -1,6 +1,7 @@
 <%= form_with(model: @task, local: true, url: choose_new_or_edit) do |f| %>
 
   <% if @task.errors.any? %>
+    <h2><%= @task.errors.count %>件のエラーがあります。</h2>
     <ul>
       <% @task.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -9,9 +10,9 @@
   <% end %>
 
   <ul>
-    <li><%= f.label :"タスク名" %></li>
+    <li><%= f.label :"タスク概要" %></li>
     <li><%= f.text_field :theme, id: "task_theme" %></li>
-    <li><%= f.label :"タスク内容", id: "task_content" %></li>
+    <li><%= f.label :"タスク詳細", id: "task_content" %></li>
     <li><%= f.text_area :content %></li>
     <li><%= f.label :"優先順位" %></li>
     <li><%= f.select :priority, { 低い: 1,　普通: 2, 高い: 1 } %></li>

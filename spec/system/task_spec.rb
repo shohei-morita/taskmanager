@@ -7,13 +7,14 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   describe 'タスク一覧画面' do
+
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示される' do
         visit visit_with_http_auth tasks_path
         expect(page).to have_content 'test_theme1'
       end
     end
-    
+
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいる' do
         visit tasks_path
@@ -22,7 +23,18 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[1]).to have_content 'test_theme1'
       end
     end
+
+    context 'タスクの終了期限によるソートを選択した場合' do
+      it 'タスクが終了期限順に並んでいる' do
+        visit tasks_path
+        click_on '終了期限でソートする'
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'test_theme1'
+        expect(task_list[1]).to have_content 'test_theme2'
+    end
   end
+
+end
 
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
@@ -30,8 +42,11 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'task_theme', with: '源五郎'
         fill_in 'task_content', with: 'これは誰だ'
+        fill_in 'time_limit', with: Date.new(2020,6,5)
         click_on 'task_post'
-        expect(page).to have_content '源五郎', 'これは誰だ'
+        expect(page).to have_content '源五郎'
+        expect(page).to have_content 'これは誰だ'
+        expect(page).to have_content '2020-06-05'
       end
     end
   end
@@ -52,5 +67,4 @@ RSpec.describe 'タスク管理機能', type: :system do
     password = 'guest_password'
     visit "http://#{username}:#{password}@#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{path}"
   end
-
 end

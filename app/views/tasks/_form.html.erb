@@ -17,9 +17,9 @@
     <li><%= f.label :"優先順位" %></li>
     <li><%= f.select :priority, { 低い: 1,　普通: 2, 高い: 1 } %></li>
     <li><%= f.label :"ステータス" %></li>
-    <li><%= f.select :status, { 未着手: 1, 着手: 2, 完了: 3 } %></li>
+    <li><%= f.select :status, { 未着手: 1, 着手中: 2, 完了: 3 } %></li>
     <li><%= f.label :"期限" %></li>
-    <li><%= f.date_field :time_limit %></li>
+    <li><%= f.date_field :time_limit, id: "time_limit" %></li>
   </ul>
     <%= f.submit "post", id: "task_post" %>
     <%= link_to "back", tasks_path %>

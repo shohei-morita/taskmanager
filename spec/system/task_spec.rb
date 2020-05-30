@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
     @task = create(:task)
-    @task = create(:second_task)
+    @second_task = create(:second_task)
   end
 
   describe 'タスク一覧画面' do
@@ -13,6 +13,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'test_theme1'
       end
     end
+    
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいる' do
         visit tasks_path
@@ -40,7 +41,7 @@ RSpec.describe 'タスク管理機能', type: :system do
        it '該当タスクの内容が表示されたページに遷移する' do
          visit tasks_path
          click_on '詳細', match: :first
-         expect(current_path).to eq task_path(@task.id)
+         expect(current_path).to eq task_path(@second_task.id)
      end
     end
   end

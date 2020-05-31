@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(time_limit: "ASC") if params[:sort_expired].present?
+    @tasks = Task.all.order(priority: "DESC") if params[:sort_priority].present?
 
     if params[:search].present?
       if params[:theme].present? && params[:status].present?

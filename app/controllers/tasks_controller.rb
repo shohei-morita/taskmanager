@@ -55,9 +55,7 @@ class TasksController < ApplicationController
 
   def confirm
     @task = Task.new(task_params)
-    if status_back
-      render :new
-    end
+    render :new if @task.invalid? || status_back
   end
 
   private

@@ -12,3 +12,13 @@ ja:
     index_title: タスク一覧
     new_title: タスクを登録する
     show_title: タスク詳細
+  enums:
+    task:
+      status:
+        yet: 未着手
+        doing: 着手中
+        done: 完了
+      priority:
+        low: 低い
+        middle: 普通
+        high: 高い

@@ -11,8 +11,8 @@
   <ul>
     <li><%= t('view.theme') %>:<%= @task.theme %></li>
     <li><%= t('view.content') %>:<%= @task.content %></li>
-    <li><%= t('view.priority') %>:<%= priority_labels.key(@task.priority) %></li>
-    <li><%= t('view.status') %>:<%= status_labels.key(@task.status) %></li>
+    <li><%= t('view.priority') %>:<%= t("view.#{@task.priority}") %></li>
+    <li><%= t('view.status') %>:<%= t("view.#{@task.status}") %></li>
     <li><%= t('view.time_limit') %>:<%= @task.time_limit %></li>
   </ul>
   <%= f.submit %>

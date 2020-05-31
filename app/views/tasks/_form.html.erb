@@ -15,7 +15,7 @@
     <li><%= f.label :"タスク詳細" %></li>
     <li><%= f.text_area :content, id: "task_content"%></li>
     <li><%= f.label :"優先順位" %></li>
-    <li><%= f.select :priority, selection_from_enum(Task, :priority) %></li>
+    <li><%= f.select :priority, selection_from_enum(Task, :priority), id: "task_priority" %></li>
     <li><%= f.label :"ステータス" %></li>
     <li><%= f.select :status, selection_from_enum(Task, :status), id: "task_status" %></li>
     <li><%= f.label :"期限" %></li>

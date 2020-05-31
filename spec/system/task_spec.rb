@@ -22,16 +22,27 @@ RSpec.describe 'タスク管理機能', type: :system do
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'test3'
         expect(task_list[1]).to have_content 'test_theme2'
+        expect(task_list[2]).to have_content 'test_theme1'
       end
     end
 
-    context 'タスクの終了期限によるソートを選択した場合' do
-      it 'タスクが終了期限順に並んでいる' do
+    context 'タスクのソートを選択した場合' do
+      it 'タスクを終了期限順に並べることができる' do
         visit tasks_path
         click_on '終了期限でソートする'
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'test_theme1'
         expect(task_list[1]).to have_content 'test_theme2'
+        expect(task_list[2]).to have_content 'test3'
+      end
+
+      it 'タスクを優先順位順に並べることができる' do
+        visit tasks_path
+        click_on '優先順位でソートする'
+        priority_list = all('.priority_row')
+        expect(priority_list[0]).to have_content '高い'
+        expect(priority_list[1]).to have_content '普通'
+        expect(priority_list[2]).to have_content '低い'
       end
     end
 
@@ -63,7 +74,6 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
 
-
   end
 
   describe 'タスク登録画面' do
@@ -74,6 +84,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task_content', with: 'これは誰だ'
         fill_in 'time_limit', with: Date.new(2020,6,5)
         select '着手中', from: 'task_status'
+        select '高い', from: 'task_priority'
         click_on 'task_post'
         expect(page).to have_content '源五郎'
         expect(page).to have_content 'これは誰だ'

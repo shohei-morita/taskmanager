@@ -2,11 +2,7 @@ class Task < ApplicationRecord
   validates :theme, presence: true
   validates :content, presence: true
 
-  #def self.search(search)
-  #  if search
-  #    Task.where(['theme LIKE ?', "%#{search}%"])
-  #  else
-  #    Task.all
-  #  end
-  #end
+  scope :search_theme, -> (search) { where("theme LIKE ?", "%#{search}%") }
+  scope :search_status, -> (search) { where(status: search) }
+
 end

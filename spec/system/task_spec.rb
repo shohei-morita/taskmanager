@@ -61,6 +61,8 @@ end
     end
   end
 
+  
+
   private
   def visit_with_http_auth(path)
     username = 'guest_user'

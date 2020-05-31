@@ -4,11 +4,11 @@
 
 <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
   <%= f.label :"タスク検索" %>
-  <%= f.text_field :theme %>
+  <%= f.text_field :theme, id: "theme_search" %>
   <%= f.label :"ステータス検索" %>
   <%= f.select :status, { 未着手: 1, 着手中: 2, 完了: 3 }, include_blank: :true %>
   <%= f.hidden_field :search, value: "true" %>
-  <%= f.submit "検索", name: nil %>
+  <%= f.submit "検索", name: nil, id: "exec_search" %>
 <% end %>
 
 
@@ -30,7 +30,7 @@
       <td class="task_row" ><%= task.theme %></td>
       <td><%= task.content %></td>
       <td><%= priority_labels.key(task.priority) %></td>
-      <td><%= status_labels.key(task.status) %></td>
+      <td class="status_row"><%= status_labels.key(task.status) %></td>
       <td><%= task.time_limit %></td>
       <td><%= task.created_at.strftime("%Y/%m/%d") %></td>
       <td><%= link_to "詳細", task_path(task.id) %></td>

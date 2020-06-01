@@ -1,5 +1,6 @@
 ja:
   view:
+    header: Task Manager
     theme: タスク概要
     content: タスク詳細
     priority: 優先順位

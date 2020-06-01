@@ -26,8 +26,7 @@ class TasksController < ApplicationController
     if status_back
       render :new
     elsif @task.save
-      redirect_to tasks_path
-      flash[:notice] = "タスクの登録が完了しました。"
+      redirect_to tasks_path, success: "タスクの登録が完了しました。"
     else
       render :new
     end
@@ -41,8 +40,7 @@ class TasksController < ApplicationController
     if status_back
       redirect_to tasks_path
     elsif @task.update(task_params)
-      redirect_to tasks_path
-      flash[:notice] = "タスクの編集が完了しました"
+      redirect_to tasks_path, success: "タスクの編集が完了しました"
     else
       render :edit
     end
@@ -50,8 +48,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path
-    flash[:danger] = "タスクを削除しました"
+    redirect_to tasks_path, danger: "タスクを削除しました"
   end
 
   def confirm

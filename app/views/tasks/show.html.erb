@@ -1,10 +1,30 @@
-<h1><%= t('view.show_title') %></h1>
+<div class="container">
 
+  <h3><%= t('view.show_title') %></h3>
 
-<p><%= t('view.theme') %>:<%= @task.theme %></p>
-<p><%= t('view.content') %>:<%= @task.content %></p>
-<p><%= t('view.priority') %>:<%= priority_labels.key(@task.priority) %></p>
-<p><%= t('view.status') %>:<%= status_labels.key(@task.status) %></p>
-<p><%= t('view.time_limit') %>:<%= @task.time_limit %></p>
-<%= link_to "edit", edit_task_path(@task.id) %>|
-<%= link_to "一覧", tasks_path %>
+  <table class="table table-task-show">
+    <tr>
+      <th><%= t('view.theme') %></th>
+      <td><%= @task.theme %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.content') %></th>
+      <td><%= @task.content %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.priority') %></th>
+      <td><%= priority_labels.key(@task.priority) %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.status') %></th>
+      <td><%= status_labels.key(@task.status) %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.time_limit') %></th>
+      <td><%= @task.time_limit %></td>
+    </tr>
+  </table>
+
+  <%= link_to "edit", edit_task_path(@task.id), class: "btn btn-primary" %>
+  <%= link_to "一覧", tasks_path, class: "btn btn-info" %>
+</div>

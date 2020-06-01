@@ -2,17 +2,17 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
 
   def index
-    @tasks = Task.all.order(created_at: "DESC")
-    @tasks = Task.all.order(time_limit: "ASC") if params[:sort_expired].present?
-    @tasks = Task.all.order(priority: "DESC") if params[:sort_priority].present?
+    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(10)
+    @tasks = Task.all.order(time_limit: "ASC").page(params[:page]).per(10) if params[:sort_expired].present?
+    @tasks = Task.all.order(priority: "DESC").page(params[:page]).per(10) if params[:sort_priority].present?
 
     if params[:search].present?
       if params[:theme].present? && params[:status].present?
-        @tasks = Task.search_theme(params[:theme]).search_status(params[:status])
+        @tasks = Task.search_theme(params[:theme]).search_status(params[:status]).page(params[:page]).per(10)
       elsif params[:theme].present? && params[:status].blank?
-        @tasks = Task.search_theme(params[:theme])
+        @tasks = Task.search_theme(params[:theme]).page(params[:page]).per(10)
       elsif params[:theme].blank? && params[:status].present?
-        @tasks = Task.search_status(params[:status])
+        @tasks = Task.search_status(params[:status]).page(params[:page]).per(10)
       end
     end
   end
@@ -68,4 +68,5 @@ class TasksController < ApplicationController
   def status_back
     params[:back]
   end
+
 end

@@ -20,11 +20,11 @@
     </tr>
     <tr>
       <th><%= t('view.priority') %></th>
-      <td><%= priority_labels.key(@task.priority) %></td>
+      <td><%= t("view.#{@task.priority}") %></td>
     </tr>
     <tr>
       <th><%= t('view.status') %></th>
-      <td><%= status_labels.key(@task.status) %></td>
+      <td><%= t("view.#{@task.status}") %></td>
     </tr>
     <tr>
       <th><%= t('view.time_limit') %></th>

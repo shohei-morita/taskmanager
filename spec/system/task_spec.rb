@@ -90,6 +90,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'これは誰だ'
         expect(page).to have_content '2020-06-05'
         expect(page).to have_content '着手中'
+        expect(page).to have_content '高い'
       end
     end
   end

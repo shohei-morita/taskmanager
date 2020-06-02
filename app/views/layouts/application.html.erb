@@ -10,9 +10,14 @@
   </head>
 
   <body>
-    <% flash.each do |task_type, task| %>
-      <div><%= task %></div>
-    <% end %>
-    <%= yield %>
+    <div class="container-fluid">
+      <header class="page-header">
+        <h1><%= t('view.header') %></h1>
+      </header>
+      <% flash.each do |task_type, task| %>
+        <div class="alert alert-<%= task_type %>"><%= task %></div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

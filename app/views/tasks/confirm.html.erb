@@ -8,13 +8,30 @@
   <%= f.hidden_field :priority %>
   <%= f.hidden_field :status %>
   <%= f.hidden_field :time_limit %>
-  <ul>
-    <li><%= t('view.theme') %>:<%= @task.theme %></li>
-    <li><%= t('view.content') %>:<%= @task.content %></li>
-    <li><%= t('view.priority') %>:<%= priority_labels.key(@task.priority) %></li>
-    <li><%= t('view.status') %>:<%= status_labels.key(@task.status) %></li>
-    <li><%= t('view.time_limit') %>:<%= @task.time_limit %></li>
-  </ul>
-  <%= f.submit %>
-  <%= f.submit "back", name: "back" %>
+
+  <table class="table table-task-show">
+    <tr>
+      <th><%= t('view.theme') %></th>
+      <td><%= @task.theme %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.content') %></th>
+      <td><%= @task.content %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.priority') %></th>
+      <td><%= t("view.#{@task.priority}") %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.status') %></th>
+      <td><%= t("view.#{@task.status}") %></td>
+    </tr>
+    <tr>
+      <th><%= t('view.time_limit') %></th>
+      <td><%= @task.time_limit %></td>
+    </tr>
+  </table>
+
+  <%= f.submit "Post", class: "btn btn-primary" %>
+  <%= f.submit "back", name: "back", class: "btn btn-info" %>
 <% end %>

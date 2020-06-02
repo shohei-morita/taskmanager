@@ -1,7 +1,24 @@
-<h1><%= t('view.index_title') %></h1>
-<%= link_to "タスク登録", new_task_path %>
+<h3><%= t('view.index_title') %></h3>
+<div class="links">
+  <%= link_to "タスク登録", new_task_path, class:"btn btn-primary" %>
+  <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true"), class:'btn btn-info btn-links' %>
+  <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true"), class:'btn btn-info btn-links' %>
+</div>
 
-<table>
+<%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
+  <div class="form-group search-fields">
+    <%= f.label :"概要検索" %>
+    <%= f.text_field :theme, id: "theme_search", class: "search-form" %>
+    <%= f.label :"ステータス検索" %>
+    <%= f.select :status, selection_from_enum(Task, :status), include_blank: :true  %>
+    <%= f.hidden_field :search, value: "true" %>
+    <%= f.submit "検索", name: nil, id: "exec_search", class: "btn-primary btn-search" %>
+  </div>
+<% end %>
+
+<div class="pagination"><%= paginate @tasks %></div>
+
+<table class="table table-striped task-table">
   <thead>
     <tr>
       <th><%= t('view.theme') %></th>
@@ -18,13 +35,13 @@
     <tr>
       <td class="task_row" ><%= task.theme %></td>
       <td><%= task.content %></td>
-      <td><%= priority_labels.key(task.priority) %></td>
-      <td><%= status_labels.key(task.status) %></td>
+      <td class="priority_row"><%= t("view.#{task.priority}") %></td>
+      <td class="status_row"><%= t("view.#{task.status}") %></td>
       <td><%= task.time_limit %></td>
-      <td><%= task.created_at.strftime("%Y/%m/%d") %></td>
-      <td><%= link_to "詳細", task_path(task.id) %></td>
-      <td><%= link_to "編集", edit_task_path(task.id) %></td>
-      <td><%= link_to "削除", task_path(task.id), method: :delete, data: { confirm: "本当に削除しますか" } %></td>
+      <td><%= task.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= link_to "詳細", task_path(task.id), class: "btn btn-info" %></td>
+      <td><%= link_to "編集", edit_task_path(task.id), class: "btn btn-info" %></td>
+      <td><%= link_to "削除", task_path(task.id), method: :delete, data: { confirm: "本当に削除しますか" }, class: "btn btn-danger" %></td>
     </tr>
     <% end %>
   </tbody>

@@ -12,7 +12,7 @@ module TasksHelper
   end
 
   def status_labels
-    { 未着手: 1, 着手: 2, 完了: 3 }
+    { 未着手: 1, 着手中: 2, 完了: 3 }
   end
 
 end

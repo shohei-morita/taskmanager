@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
+  before_action :authenticate_user
 
   def index
     @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(10)

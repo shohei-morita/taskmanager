@@ -1,0 +1,12 @@
+<table class="table table-striped">
+  <tr>
+    <th>名前</th>
+    <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>email</th>
+    <td><%= @user.email %></td>
+  </tr>
+</table>
+
+<%= link_to "投稿一覧へ", tasks_path(@user.id) %>

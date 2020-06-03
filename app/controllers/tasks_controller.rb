@@ -1,19 +1,19 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
-  before_action :authenticate_user
+  before_action :authenticate_user, only: %i(index new show edit)
 
   def index
-    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(10)
-    @tasks = Task.all.order(time_limit: "ASC").page(params[:page]).per(10) if params[:sort_expired].present?
-    @tasks = Task.all.order(priority: "DESC").page(params[:page]).per(10) if params[:sort_priority].present?
+    @tasks = current_user.tasks.all.order(created_at: "DESC").page(params[:page]).per(10)
+    @tasks = current_user.tasks.all.order(time_limit: "ASC").page(params[:page]).per(10) if params[:sort_expired].present?
+    @tasks = current_user.tasks.all.order(priority: "DESC").page(params[:page]).per(10) if params[:sort_priority].present?
 
     if params[:search].present?
       if params[:theme].present? && params[:status].present?
-        @tasks = Task.search_theme(params[:theme]).search_status(params[:status]).page(params[:page]).per(10)
+        @tasks = current_user.search_theme(params[:theme]).search_status(params[:status]).page(params[:page]).per(10)
       elsif params[:theme].present? && params[:status].blank?
-        @tasks = Task.search_theme(params[:theme]).page(params[:page]).per(10)
+        @tasks = current_user.search_theme(params[:theme]).page(params[:page]).per(10)
       elsif params[:theme].blank? && params[:status].present?
-        @tasks = Task.search_status(params[:status]).page(params[:page]).per(10)
+        @tasks = current_user.search_status(params[:status]).page(params[:page]).per(10)
       end
     end
   end
@@ -59,7 +59,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:theme, :content, :priority, :status, :time_limit)
+    params.require(:task).permit(:theme, :content, :priority, :status, :time_limit, :user_id)
   end
 
   def set_task

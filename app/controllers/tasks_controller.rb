@@ -3,9 +3,9 @@ class TasksController < ApplicationController
   before_action :authenticate_user, only: %i(index new show edit)
 
   def index
-    @tasks = current_user.tasks.all.order(created_at: "DESC").page(params[:page]).per(10)
-    @tasks = current_user.tasks.all.order(time_limit: "ASC").page(params[:page]).per(10) if params[:sort_expired].present?
-    @tasks = current_user.tasks.all.order(priority: "DESC").page(params[:page]).per(10) if params[:sort_priority].present?
+    @tasks = data_select.order(created_at: "DESC").page(params[:page]).per(10)
+    @tasks = data_select.order(time_limit: "ASC").page(params[:page]).per(10) if params[:sort_expired].present?
+    @tasks = data_select.order(priority: "DESC").page(params[:page]).per(10) if params[:sort_priority].present?
 
     if params[:search].present?
       if params[:theme].present? && params[:status].present?
@@ -60,6 +60,10 @@ class TasksController < ApplicationController
   private
   def task_params
     params.require(:task).permit(:theme, :content, :priority, :status, :time_limit, :user_id)
+  end
+
+  def data_select
+    current_user.tasks.select(:id, :theme, :content, :priority, :status, :time_limit, :user_id, :created_at, :updated_at)
   end
 
   def set_task

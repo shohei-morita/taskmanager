@@ -1,0 +1,30 @@
+<div class="container">
+
+<h3><%= @user.name %>の登録タスク一覧</h3>
+
+<table class="table table-striped task-table">
+  <thead>
+    <tr>
+      <th><%= t('view.theme') %></th>
+      <th><%= t('view.content') %></th>
+      <th><%= t('view.priority') %></th>
+      <th><%= t('view.status') %></th>
+      <th><%= t('view.time_limit') %></th>
+      <th><%= t('view.post_time') %></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user.tasks.each do |task| %>
+    <tr>
+      <td><%= task.theme %></td>
+      <td><%= task.content %></td>
+      <td><%= t("view.#{task.priority}") %></td>
+      <td><%= t("view.#{task.status}") %></td>
+      <td><%= task.time_limit %></td>
+      <td><%= task.created_at.strftime("%Y-%m-%d") %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to "ユーザー一覧", admin_users_path, class:"btn btn-info"%>

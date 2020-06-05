@@ -1,8 +1,10 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy)
+  before_action :authenticate_user, only: %i(index new show edit)
+  before_action :non_admin_user
 
   def index
-    @users = User.select(:id, :name, :email, :created_at, :updated_at)
+    @users = User.select(:id, :name, :admin, :email, :created_at, :updated_at)
   end
 
   def new
@@ -37,15 +39,19 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path, danger: "ユーザーを削除しました"
+    redirect_to admin_users_path
   end
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
   end
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def non_admin_user
+    redirect_to tasks_path, danger: "あなたは管理者ではありません" unless current_user.admin?
   end
 end

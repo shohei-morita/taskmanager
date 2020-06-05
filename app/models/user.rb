@@ -9,4 +9,23 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   has_secure_password
+
+  enum admin: { user: false, admin: true }
+
+  before_destroy :do_not_destroy_last_one_admin
+  before_update :do_not_change_last_one_admin
+
+  private
+  def do_not_destroy_last_one_admin
+    if User.where(admin: true).count <= 1 && self.admin?
+      throw(:abort)
+    end
+  end
+
+  def do_not_change_last_one_admin
+    if User.where(admin: true).count == 1 && self.admin? == false
+      throw(:abort)
+    end
+  end
+
 end

@@ -1,7 +1,17 @@
 name = Faker::Games::Pokemon.name
+name2 = Faker::Games::Pokemon.name
 email = Faker::Internet.email
+email2 = Faker::Internet.email
 password = "pasword"
 User.create!(name: name,
              email: email,
-             password_digest: password,
+             password: password,
+             password_confirmation: password,
+             admin: false,
             )
+User.create!(name: name2,
+             email: email2,
+             password: password,
+             password_confirmation: password,
+             admin: true,
+)

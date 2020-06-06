@@ -16,7 +16,7 @@ class Admin::UsersController < ApplicationController
     if params[:back]
       redirect_to admin_users_path
     elsif @user.save
-      redirect_to admin_users_path, success: "新規ユーザーを登録しました"
+      redirect_to admin_users_path, success: "新規ユーザを登録しました"
     else
       render :new
     end
@@ -39,7 +39,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path
+    redirect_to admin_users_path, danger: "ユーザを削除しました"
   end
 
   private

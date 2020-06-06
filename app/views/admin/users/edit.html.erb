@@ -16,27 +16,27 @@
 <%= form_with(model: [ :admin, @user], local: true) do |f| %>
   <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control"  %>
+    <%= f.text_field :name, class: "form-control", id: "edit-user-name"  %>
   </div>
   <div class="form-group">
     <%= f.label :email %>
-    <%= f.email_field :email, class: "form-control"  %>
+    <%= f.email_field :email, class: "form-control" , id: "edit-user-email" %>
   </div>
   <div class="form-group">
     <%= f.label :"管理者権限" %>
-    <%= f.select :admin, selection_from_enum(User, :admin), {}, class: "form-control"%>
+    <%= f.select :admin, selection_from_enum(User, :admin), {}, class: "form-control", id: "edit-user-authority" %>
   </div>
   <div class="form-group">
     <%= f.label :password %>
-    <%= f.password_field :password, class: "form-control"  %>
+    <%= f.password_field :password, class: "form-control", id: "edit-user-pw" %>
   </div>
   <div class="form-group">
     <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, class: "form-control"  %>
+    <%= f.password_field :password_confirmation, class: "form-control", id: "edit-user-pwcf"  %>
   </div>
   <div class="form-group">
-    <%= f.submit "Update user", class: "btn btn-primary" %>
-    <%= f.submit "Back", name: "back", class: "btn btn-info" %>
+    <%= f.submit "Update user", class: "btn btn-primary", id: "new-user-create" %>
+    <%= f.submit "Back", name: "back",  Class: "btn btn-info"%>
   </div>
 <% end %>
 </div>

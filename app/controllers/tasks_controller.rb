@@ -58,6 +58,7 @@ class TasksController < ApplicationController
   end
 
   private
+  
   def task_params
     params.require(:task).permit(:theme, :content, :priority, :status, :time_limit, :user_id)
   end
@@ -73,5 +74,4 @@ class TasksController < ApplicationController
   def status_back
     params[:back]
   end
-
 end

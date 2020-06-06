@@ -6,7 +6,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     @task = create(:task, user: @user)
     @second_task = create(:second_task, user: @user)
     @third_task = create(:third_task, user: @user)
-    user_login
+    login_as(@user)
   end
 
   describe 'タスク一覧画面' do
@@ -108,16 +108,10 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   private
+
   def visit_with_http_auth(path)
     username = 'guest_user'
     password = 'guest_password'
     visit "http://#{username}:#{password}@#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{path}"
-  end
-
-  def user_login
-    visit new_session_path
-    fill_in 'session-email', with: 'user@example.com'
-    fill_in 'session-pw', with: '0000000'
-    click_on 'session-login'
   end
 end

@@ -25,11 +25,10 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
   end
 
   describe 'セッション機能のテスト' do
-
     context 'ユーザのデータがありログインしていない場合' do
       it 'ログインをして、マイページに遷移するテスト' do
         user = create(:user)
-        user_login
+        login_as(user)
         expect(current_path).to eq user_path(user.id)
       end
     end
@@ -38,7 +37,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
       it '詳細画面に遷移するテスト' do
         user = create(:user)
         user2 = create(:user2)
-        user_login
+        login_as(user)
         visit user_path(user2.id)
         expect(current_path).to eq tasks_path
       end
@@ -47,7 +46,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
     context 'ログアウトリンクをクリックした場合' do
       it 'ログアウトができるテスト' do
         user = create(:user)
-        user_login
+        login_as(user)
         click_on 'Logout'
         expect(current_path).to eq new_session_path
       end
@@ -59,7 +58,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
     context '管理者が管理画面にアクセスした場合' do
       it 'アクセスができるテスト' do
         admin = create(:admin)
-        admin_login
+        login_as(admin)
         visit admin_users_path
         expect(current_path).to eq admin_users_path
       end
@@ -68,7 +67,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
     context '一般ユーザが管理画面にアクセスした場合' do
       it '管理画面にアクセスできないテスト' do
         user = create(:user)
-        user_login
+        login_as(user)
         visit admin_users_path
         expect(current_path).to eq tasks_path
         expect(page).to have_content 'あなたは管理者ではありません'
@@ -78,7 +77,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
     context '管理者がユーザを新規登録した場合' do
       it '新規ユーザを登録できるテスト' do
         admin = create(:admin)
-        admin_login
+        login_as(admin)
         visit new_admin_user_path
         fill_in 'new-user-name', with: 'sample'
         fill_in 'new-user-email', with: 'sample@example.com'
@@ -96,7 +95,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
       it '詳細画面にアクセスできるテスト' do
         user = create(:user)
         admin = create(:admin)
-        admin_login
+        login_as(admin)
         visit admin_users_path
         click_on 'タスク閲覧', match: :first
         expect(current_path).to eq admin_user_path(user.id)
@@ -107,7 +106,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
       it 'ユーザ情報を編集できるテスト' do
         user = create(:user)
         admin = create(:admin)
-        admin_login
+        login_as(admin)
         visit admin_users_path
         click_on 'ユーザ編集', match: :first
         fill_in 'edit-user-name', with: 'sample-edited'
@@ -126,7 +125,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
       it 'ユーザの削除ができるテスト' do
         user = create(:user)
         admin = create(:admin)
-        admin_login
+        login_as(admin)
         visit admin_users_path
         click_on 'ユーザ削除', match: :first
         page.accept_confirm
@@ -135,21 +134,5 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         expect(page).to have_no_content '一般'
       end
     end
-
-  end
-
-  private
-  def user_login
-    visit new_session_path
-    fill_in 'session-email', with: 'user@example.com'
-    fill_in 'session-pw', with: '0000000'
-    click_on 'session-login'
-  end
-
-  def admin_login
-    visit new_session_path
-    fill_in 'session-email', with: 'admin@example.com'
-    fill_in 'session-pw', with: '0000000'
-    click_on 'session-login'
   end
 end

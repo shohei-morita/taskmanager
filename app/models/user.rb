@@ -16,16 +16,16 @@ class User < ApplicationRecord
   before_update :do_not_change_last_one_admin
 
   private
+
   def do_not_destroy_last_one_admin
-    if User.where(admin: true).count <= 1 && self.admin?
+    if User.where(admin: true).one? && self.admin?
       throw(:abort)
     end
   end
 
   def do_not_change_last_one_admin
-    if User.where(admin: true).count == 1 && self.admin? == false
+    if User.where(admin: true).one? && self.admin? == false
       throw(:abort)
     end
   end
-
 end

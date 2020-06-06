@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy)
   before_action :authenticate_user, only: %i(index new show edit)
-  before_action :non_admin_user
+  before_action :require_admin_user
 
   def index
     @users = User.select(:id, :name, :admin, :email, :created_at, :updated_at)
@@ -43,6 +43,7 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
   end
@@ -51,7 +52,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def non_admin_user
+  def require_admin_user
     redirect_to tasks_path, danger: "あなたは管理者ではありません" unless current_user.admin?
   end
 end

@@ -1,4 +1,4 @@
-module LoginMacros
+module LoginMacro
   def login_as(user)
     visit new_session_path
     fill_in 'session-email', with: user.email

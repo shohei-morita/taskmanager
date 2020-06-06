@@ -9,11 +9,11 @@ class TasksController < ApplicationController
 
     if params[:search].present?
       if params[:theme].present? && params[:status].present?
-        @tasks = current_user.search_theme(params[:theme]).search_status(params[:status]).page(params[:page]).per(10)
+        @tasks = data_select.search_theme(params[:theme]).search_status(params[:status]).page(params[:page]).per(10)
       elsif params[:theme].present? && params[:status].blank?
-        @tasks = current_user.search_theme(params[:theme]).page(params[:page]).per(10)
+        @tasks = data_select.search_theme(params[:theme]).page(params[:page]).per(10)
       elsif params[:theme].blank? && params[:status].present?
-        @tasks = current_user.search_status(params[:status]).page(params[:page]).per(10)
+        @tasks = data_select.search_status(params[:status]).page(params[:page]).per(10)
       end
     end
   end

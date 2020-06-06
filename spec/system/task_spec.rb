@@ -2,16 +2,18 @@ require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
   before do
-    @task = create(:task)
-    @second_task = create(:second_task)
-    @third_task = create(:third_task)
+    @user = create(:user)
+    @task = create(:task, user: @user)
+    @second_task = create(:second_task, user: @user)
+    @third_task = create(:third_task, user: @user)
+    user_login
   end
 
   describe 'タスク一覧画面' do
 
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示される' do
-        visit visit_with_http_auth tasks_path
+        visit tasks_path
         expect(page).to have_content 'test_theme1'
       end
     end
@@ -29,7 +31,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクのソートを選択した場合' do
       it 'タスクを終了期限順に並べることができる' do
         visit tasks_path
-        click_on '終了期限でソートする'
+        click_on '終了期限でソート'
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'test_theme1'
         expect(task_list[1]).to have_content 'test_theme2'
@@ -38,7 +40,7 @@ RSpec.describe 'タスク管理機能', type: :system do
 
       it 'タスクを優先順位順に並べることができる' do
         visit tasks_path
-        click_on '優先順位でソートする'
+        click_on '優先順位でソート'
         priority_list = all('.priority_row')
         expect(priority_list[0]).to have_content '高い'
         expect(priority_list[1]).to have_content '普通'
@@ -110,5 +112,12 @@ RSpec.describe 'タスク管理機能', type: :system do
     username = 'guest_user'
     password = 'guest_password'
     visit "http://#{username}:#{password}@#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}#{path}"
+  end
+
+  def user_login
+    visit new_session_path
+    fill_in 'session-email', with: 'user@example.com'
+    fill_in 'session-pw', with: '0000000'
+    click_on 'session-login'
   end
 end

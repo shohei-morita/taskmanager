@@ -5,6 +5,7 @@ FactoryBot.define do
     time_limit { Date.new(2020, 6, 5) }
     status { 1 }
     priority { 1 }
+    user
   end
 
   factory :second_task, class: Task do
@@ -13,6 +14,7 @@ FactoryBot.define do
     time_limit { Date.new(2020, 6, 6) }
     status { 1 }
     priority { 2 }
+    user
   end
 
   factory :third_task, class: Task do
@@ -21,5 +23,6 @@ FactoryBot.define do
     time_limit { Date.new(2020, 6, 7) }
     status { 2 }
     priority { 3 }
+    user
   end
 end

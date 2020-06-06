@@ -8,9 +8,9 @@
 <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
   <div class="form-group search-fields">
     <%= f.label :"概要検索" %>
-    <%= f.text_field :theme, id: "theme_search", class: "search-form" %>
+    <%= f.text_field :theme, class: "search-form", id: "theme_search" %>
     <%= f.label :"ステータス検索" %>
-    <%= f.select :status, selection_from_enum(Task, :status), include_blank: :true  %>
+    <%= f.select :status, selection_from_enum(Task, :status), include_blank: :true, id: "search_status"  %>
     <%= f.hidden_field :search, value: "true" %>
     <%= f.submit t('view.search_task'), name: nil, id: "exec_search", class: "btn-primary btn-search" %>
   </div>

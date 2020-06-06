@@ -23,7 +23,7 @@
   </div>
   <div class="form-group">
     <%= f.label :"権限設定" %>
-    <%= f.select :admin, selection_from_enum(User, :admin), {}, class: "form-control", id: "new-user-authority" %>
+    <%= f.select :admin, { "一般": false, "管理者": true } , {}, class: "form-control", id: "new-user-authority" %>
   </div>
   <div class="form-group">
     <%= f.label :password %>

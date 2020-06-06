@@ -10,8 +10,6 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  enum admin: { user: false, admin: true }
-
   before_destroy :do_not_destroy_last_one_admin
   before_update :do_not_change_last_one_admin
 

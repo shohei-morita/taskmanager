@@ -9,7 +9,3 @@ ja:
         low: 低い
         middle: 普通
         high: 高い
-    user:
-      admin:
-        user: 一般
-        admin: 管理者

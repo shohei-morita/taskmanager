@@ -30,8 +30,8 @@ ja:
     low: 低い
     middle: 普通
     high: 高い
-    user: 一般
-    admin: 管理者
+    false: 一般
+    true: 管理者
     user_admin: ユーザ管理画面
     user_admin_index: ユーザ一覧
     new_user_post: 新規ユーザ登録

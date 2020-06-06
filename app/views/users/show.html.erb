@@ -1,6 +1,6 @@
 <table class="table table-striped">
   <tr>
-    <th>名前</th>
+    <th><%= t('view.name') %></th>
     <td><%= @user.name %></td>
   </tr>
   <tr>
@@ -9,4 +9,4 @@
   </tr>
 </table>
 
-<%= link_to "投稿一覧へ", tasks_path(@user.id), class: "btn btn-info" %>
+<%= link_to t('view.user_to_index'), tasks_path(@user.id), class: "btn btn-info" %>

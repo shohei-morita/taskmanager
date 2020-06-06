@@ -2,17 +2,28 @@ ja:
   view:
     header: Task Manager
     theme: タスク概要
+    search_task: 検索
+    post_task: タスク登録
+    sort_time_limit: 終了期限でソート
+    sort_priority: 優先順位でソート
     content: タスク詳細
     priority: 優先順位
     status: ステータス
     time_limit: 期限
     post_time: 登録日
+    index: 一覧
+    show: 詳細
+    edit: 編集
+    destroy: 削除
+    confirm: 本当に削除しますか？
     confirm_title: タスク確認
     confirm_text: 以下の内容でタスクを登録しますか？
     edit_title: タスクを編集する
     index_title: タスク一覧
     new_title: タスクを登録する
     show_title: タスク詳細
+    user_to_index: 投稿一覧
+    name: 名前
     yet: 未着手
     doing: 着手中
     done: 完了
@@ -21,3 +32,13 @@ ja:
     high: 高い
     user: 一般
     admin: 管理者
+    user_admin: ユーザ管理画面
+    user_admin_index: ユーザ一覧
+    new_user_post: 新規ユーザ登録
+    user_name: ユーザ名
+    user_email: 登録メールアドレス
+    user_tasks: 登録タスク数
+    user_authority: 権限
+    user_tasks_show: タスク閲覧
+    user_edit: ユーザ編集
+    user_destroy: ユーザ削除

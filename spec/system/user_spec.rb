@@ -80,7 +80,12 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         admin = create(:admin)
         admin_login
         visit new_admin_user_path
-        admin_creates_user
+        fill_in 'new-user-name', with: 'sample'
+        fill_in 'new-user-email', with: 'sample@example.com'
+        select '一般', from: 'new-user-authority'
+        fill_in 'new-user-pw', with: '0000000'
+        fill_in 'new-user-pwcf', with: '0000000'
+        click_on 'new-user-create'
         expect(page).to have_content 'sample'
         expect(page).to have_content 'sample@example.com'
         expect(page).to have_content '一般'
@@ -91,12 +96,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
       it '詳細画面にアクセスできるテスト' do
         user = create(:user)
         admin = create(:admin)
-        fill_in 'new-user-name', with: 'sample'
-        fill_in 'new-user-email', with: 'sample@example.com'
-        select '一般', from: 'new-user-authority'
-        fill_in 'new-user-pw', with: '0000000'
-        fill_in 'new-user-pwcf', with: '0000000'
-        click_on 'new-user-create'
+        admin_login
         visit admin_users_path
         click_on 'タスク閲覧', match: :first
         expect(current_path).to eq admin_user_path(user.id)

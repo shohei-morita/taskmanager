@@ -2,16 +2,18 @@ require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
   before do
-    @task = create(:task)
-    @second_task = create(:second_task)
-    @third_task = create(:third_task)
+    @user = create(:user)
+    @task = create(:task, user: @user)
+    @second_task = create(:second_task, user: @user)
+    @third_task = create(:third_task, user: @user)
+    login_as(@user)
   end
 
   describe 'タスク一覧画面' do
 
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示される' do
-        visit visit_with_http_auth tasks_path
+        visit tasks_path
         expect(page).to have_content 'test_theme1'
       end
     end
@@ -19,30 +21,45 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいる' do
         visit tasks_path
-        task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'test3'
-        expect(task_list[1]).to have_content 'test_theme2'
-        expect(task_list[2]).to have_content 'test_theme1'
+        begin
+          task_list = all('.task_row')
+          expect(task_list[0]).to have_content 'test3'
+          expect(task_list[1]).to have_content 'test_theme2'
+          expect(task_list[2]).to have_content 'test_theme1'
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          sleep 1
+          retry
+        end
       end
     end
 
     context 'タスクのソートを選択した場合' do
       it 'タスクを終了期限順に並べることができる' do
         visit tasks_path
-        click_on '終了期限でソートする'
+        click_on '終了期限でソート'
+        begin
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'test_theme1'
-        expect(task_list[1]).to have_content 'test_theme2'
-        expect(task_list[2]).to have_content 'test3'
+          expect(task_list[0]).to have_content 'test_theme1'
+          expect(task_list[1]).to have_content 'test_theme2'
+          expect(task_list[2]).to have_content 'test3'
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          sleep 1
+          retry
+        end
       end
 
       it 'タスクを優先順位順に並べることができる' do
         visit tasks_path
-        click_on '優先順位でソートする'
-        priority_list = all('.priority_row')
-        expect(priority_list[0]).to have_content '高い'
-        expect(priority_list[1]).to have_content '普通'
-        expect(priority_list[2]).to have_content '低い'
+        click_on '優先順位でソート'
+        begin
+          priority_list = all('.priority_row')
+          expect(priority_list[0]).to have_content '高い'
+          expect(priority_list[1]).to have_content '普通'
+          expect(priority_list[2]).to have_content '低い'
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          sleep 1
+          retry
+        end
       end
     end
 
@@ -58,8 +75,13 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         select '着手中', from: 'status'
         click_on 'exec_search'
-        status_list = all('.status_row')
-        expect(status_list[0]).to have_content '着手中'
+        begin
+          status_list = all('.status_row')
+          expect(status_list[0]).to have_content '着手中'
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          sleep 1
+          retry
+        end
       end
 
       it 'タイトルとステータスの両方で検索できる' do
@@ -67,10 +89,15 @@ RSpec.describe 'タスク管理機能', type: :system do
         select '未着手', from: 'status'
         fill_in 'theme_search', with: 'theme'
         click_on 'exec_search'
-        status_list = all('.status_row')
-        expect(status_list[0]).to have_content '未着手'
-        expect(status_list[1]).to have_content '未着手'
-        expect(page).to have_content('theme', count: 2)
+        begin
+          status_list = all('.status_row')
+          expect(status_list[0]).to have_content '未着手'
+          expect(status_list[1]).to have_content '未着手'
+          expect(page).to have_content('theme', count: 2)
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          sleep 1
+          retry
+        end
       end
     end
 
@@ -106,6 +133,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   private
+
   def visit_with_http_auth(path)
     username = 'guest_user'
     password = 'guest_password'

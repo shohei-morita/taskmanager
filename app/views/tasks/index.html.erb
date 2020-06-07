@@ -1,18 +1,18 @@
 <h3><%= t('view.index_title') %></h3>
 <div class="links">
-  <%= link_to "タスク登録", new_task_path, class:"btn btn-primary" %>
-  <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true"), class:'btn btn-info btn-links' %>
-  <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true"), class:'btn btn-info btn-links' %>
+  <%= link_to t('view.post_task'), new_task_path, class:"btn btn-primary" %>
+  <%= link_to t('view.sort_time_limit'), tasks_path(sort_expired: "true"), class:'btn btn-info btn-links' %>
+  <%= link_to t('view.sort_priority'), tasks_path(sort_priority: "true"), class:'btn btn-info btn-links' %>
 </div>
 
 <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
   <div class="form-group search-fields">
     <%= f.label :"概要検索" %>
-    <%= f.text_field :theme, id: "theme_search", class: "search-form" %>
+    <%= f.text_field :theme, class: "search-form", id: "theme_search" %>
     <%= f.label :"ステータス検索" %>
-    <%= f.select :status, selection_from_enum(Task, :status), include_blank: :true  %>
+    <%= f.select :status, selection_from_enum(Task, :status), include_blank: :true, id: "search_status"  %>
     <%= f.hidden_field :search, value: "true" %>
-    <%= f.submit "検索", name: nil, id: "exec_search", class: "btn-primary btn-search" %>
+    <%= f.submit t('view.search_task'), name: nil, id: "exec_search", class: "btn-primary btn-search" %>
   </div>
 <% end %>
 
@@ -39,9 +39,9 @@
       <td class="status_row"><%= t("view.#{task.status}") %></td>
       <td><%= task.time_limit %></td>
       <td><%= task.created_at.strftime("%Y-%m-%d") %></td>
-      <td><%= link_to "詳細", task_path(task.id), class: "btn btn-info" %></td>
-      <td><%= link_to "編集", edit_task_path(task.id), class: "btn btn-info" %></td>
-      <td><%= link_to "削除", task_path(task.id), method: :delete, data: { confirm: "本当に削除しますか" }, class: "btn btn-danger" %></td>
+      <td><%= link_to t('view.show'), task_path(task.id), class: "btn btn-info" %></td>
+      <td><%= link_to t('view.edit'), edit_task_path(task.id), class: "btn btn-info" %></td>
+      <td><%= link_to t('view.destroy'), task_path(task.id), method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-danger" %></td>
     </tr>
     <% end %>
   </tbody>

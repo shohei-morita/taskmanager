@@ -6,13 +6,4 @@ module TasksHelper
       task_path
     end
   end
-
-  def priority_labels
-    { 低い: 1,  普通: 2, 高い: 3 }
-  end
-
-  def status_labels
-    { 未着手: 1, 着手中: 2, 完了: 3 }
-  end
-
 end

@@ -13,6 +13,16 @@
     <div class="container-fluid">
       <header class="page-header">
         <h1><%= t('view.header') %></h1>
+        <% if logged_in? %>
+          <%= link_to "Profile", user_path(current_user.id), class: "btn btn-primary" %>
+          <%= link_to "Logout", session_path(current_user.id), method: :delete, class: "btn btn-danger" %>
+          <% if current_user.admin? %>
+            <%= link_to "管理画面", admin_users_path, class: "btn btn-success"%>
+          <% end %>
+        <% else %>
+          <%= link_to "Sign up", new_user_path, class: "btn btn-primary" %>
+          <%= link_to "Login", new_session_path, class: "btn btn-primary" %>
+        <% end %>
       </header>
       <% flash.each do |task_type, task| %>
         <div class="alert alert-<%= task_type %>"><%= task %></div>

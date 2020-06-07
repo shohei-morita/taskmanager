@@ -1,0 +1,12 @@
+<table class="table table-striped">
+  <tr>
+    <th><%= t('view.name') %></th>
+    <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>email</th>
+    <td><%= @user.email %></td>
+  </tr>
+</table>
+
+<%= link_to t('view.user_to_index'), tasks_path(@user.id), class: "btn btn-info" %>

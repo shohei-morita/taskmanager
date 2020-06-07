@@ -1,29 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :model do
+  before do
+    @user = create(:user)
+  end
+
   context 'バリデーション機能テスト' do
     it 'titleが空ならバリデーションが通らない' do
-      task = Task.new(theme: '', content: '失敗テスト')
+      task = @user.tasks.new(theme: '', content: '失敗テスト')
       expect(task).to be_invalid
     end
 
     it 'contentが空ならバリデーションが通らない' do
-      task = Task.new(theme: '失敗テスト', content: '')
+      task = @user.tasks.new(theme: '失敗テスト', content: '')
       expect(task).to be_invalid
     end
 
     it 'titleとcontetに内容が記載されていればバリデーションが通る' do
-      task = Task.new(theme: '通過テスト', content: '通過テスト')
+      task = @user.tasks.new(theme: '通過テスト', content: '通過テスト')
       expect(task).to be_valid
     end
   end
 
   context 'scopeメソッドで検索をした場合' do
     before do
-      Task.create(theme: "task", content: "sample_task", status: 1)
-      Task.create(theme: "task", content: "sample_task2", status: 1)
-      Task.create(theme: "sample", content: "sample_task", status: 2)
-      Task.create(theme: "rake", content: "sample_task", status: 2)
+      @user.tasks.create(theme: "task", content: "sample_task", status: 1)
+      @user.tasks.create(theme: "task", content: "sample_task2", status: 1)
+      @user.tasks.create(theme: "sample", content: "sample_task", status: 2)
+      @user.tasks.create(theme: "rake", content: "sample_task", status: 2)
     end
     it 'scopeメソッドでタイトル検索ができる' do
       expect(Task.search_theme('task').count).to eq 2

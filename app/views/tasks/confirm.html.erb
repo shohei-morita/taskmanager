@@ -31,7 +31,7 @@
       <td><%= @task.time_limit %></td>
     </tr>
   </table>
-
+　<%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.submit "Post", class: "btn btn-primary" %>
   <%= f.submit "back", name: "back", class: "btn btn-info" %>
 <% end %>

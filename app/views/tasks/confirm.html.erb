@@ -8,6 +8,9 @@
   <%= f.hidden_field :priority %>
   <%= f.hidden_field :status %>
   <%= f.hidden_field :time_limit %>
+  <% @task.labels.each do |label| %>
+    <%= f.hidden_field :label_ids, multiple: true, value: label.id %>
+  <% end %>
 
   <table class="table table-task-show">
     <tr>
@@ -29,6 +32,14 @@
     <tr>
       <th><%= t('view.time_limit') %></th>
       <td><%= @task.time_limit %></td>
+    </tr>
+    <tr>
+      <th>ラベル</th>
+      <td>
+        <% @task.labels.each do |label| %>
+         <%= label.label %>
+        <% end %>
+      </td>
     </tr>
   </table>
 　<%= f.hidden_field :user_id, value: current_user.id %>

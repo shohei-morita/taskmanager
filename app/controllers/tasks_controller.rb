@@ -8,15 +8,31 @@ class TasksController < ApplicationController
     @tasks = data_select.order(priority: "DESC").page(params[:page]).per(10) if params[:sort_priority].present?
 
     if params[:search].present?
-      if params[:theme].present? && params[:status].present?
+      if params[:theme].present? && params[:status].present? && params[:label_ids].present?
+        @tasks = data_select.search_theme(params[:theme]).search_status(params[:status]).search_label(params[:label_ids]).page(params[:page]).per(10)
+
+      elsif params[:theme].present? && params[:status].present? && params[:label_ids].blank?
         @tasks = data_select.search_theme(params[:theme]).search_status(params[:status]).page(params[:page]).per(10)
-      elsif params[:theme].present? && params[:status].blank?
+
+      elsif params[:theme].present? && params[:status].blank? && params[:label_ids].present?
+        @tasks = data_select.search_theme(params[:theme]).search_label(params[:label_ids]).page(params[:page]).per(10)
+
+      elsif params[:theme].blank? && params[:status].present? && params[:label_ids].present?
+        @tasks = data_select.search_theme(params[:theme]).search_status(params[:status]).page(params[:page]).per(10)
+
+      elsif params[:theme].present? && params[:status].blank? && params[:label_ids].blank?
         @tasks = data_select.search_theme(params[:theme]).page(params[:page]).per(10)
-      elsif params[:theme].blank? && params[:status].present?
+
+      elsif params[:theme].blank? && params[:status].present? && params[:label_ids].blank?
         @tasks = data_select.search_status(params[:status]).page(params[:page]).per(10)
+
+      elsif params[:theme].blank? && params[:status].blank? && params[:label_ids].present?
+        @tasks = data_select.search_label(params[:label_ids]).page(params[:page]).per(10)
+
       end
     end
   end
+
 
   def new
     @task = Task.new

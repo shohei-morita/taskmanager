@@ -3,6 +3,7 @@ class Task < ApplicationRecord
   has_many :task_labels, dependent: :destroy
   has_many :labels, through: :task_labels
 
+
   validates :theme, presence: true
   validates :content, presence: true
 

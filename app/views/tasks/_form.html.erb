@@ -29,9 +29,9 @@
     <%= f.date_field :time_limit, id: "time_limit", class: "form-control" %>
   </div>
   <div class="form-group">
-    <% Label.all.each do |label| %>
-      <label><%= label.label %></label>
-      <%= f.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+    <%= f.label :"ラベル一覧" %>
+    <%= collection_check_boxes(:task, :label_ids, current_user.labels.all, :id, :label) do |t| %>
+     <% t.label { t.check_box + t.text } %>
     <% end %>
   </div>
   <div class="form-group">

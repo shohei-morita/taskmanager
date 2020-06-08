@@ -52,7 +52,11 @@ class TasksController < ApplicationController
   def show; end
 
   def edit
-    @labels = Label.all
+    label_data = @task.labels.all
+    unless label_data.blank?
+      @task.labels.build
+    end
+    #@labels = Label.all
   end
 
   def update

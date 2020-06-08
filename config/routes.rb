@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :labels
   resources :groups
   resources :group_users, only: %i(index create destroy)
+  mount LetterOpenerWeb::Engine, at: "/letter_opener"
 end

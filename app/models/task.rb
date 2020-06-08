@@ -13,6 +13,7 @@ class Task < ApplicationRecord
   scope :search_label, -> (search) { where(id: TaskLabel.where(label_id: search).pluck(:task_id)) }
   scope :near_limit, -> { where(time_limit: Time.zone.today..Time.zone.today + 2).where.not(status: 3) }
   scope :time_over, -> { where("time_limit <= ?", Time.zone.today - 1).where.not(status: 3) }
+  scope :remind_limit, -> { where(time_limit: Time.zone.today + 7).where.not(status: 3) }
 
   enum status: { yet: 1, doing: 2, done: 3 }
   enum priority: { low: 1, middle: 2, high: 3 }

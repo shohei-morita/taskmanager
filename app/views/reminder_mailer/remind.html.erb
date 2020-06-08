@@ -1,0 +1,5 @@
+<h1>タスクの終了期限１週間前です！</h1>
+
+<% @tasks.each do |task| %>
+  <p>タスク名: <%= task.theme %> / タスク終了期限: <%= task.time_limit %></p>
+<% end %>

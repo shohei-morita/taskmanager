@@ -12,7 +12,7 @@
     <%= f.label :"ステータス検索" %>
     <%= f.select :status, selection_from_enum(Task, :status), include_blank: :true, id: "search_status"  %>
     <%= f.label :"ラベル検索" %>
-    <%= f.select :label_ids, Label.all.collect { |l| [l.label, l.id] }, include_blank: :true %>
+    <%= f.select :label_ids, current_user.labels.all.collect { |l| [l.label, l.id] }, include_blank: :true %>
     <%= f.hidden_field :search, value: "true" %>
     <%= f.submit t('view.search_task'), name: nil, id: "exec_search", class: "btn-primary btn-search" %>
   </div>

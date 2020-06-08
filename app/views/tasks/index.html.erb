@@ -18,6 +18,8 @@
   </div>
 <% end %>
 
+<div><%= link_to "ラベル一覧", labels_path, class: "btn btn-primary" %></div>
+
 <div class="pagination"><%= paginate @tasks %></div>
 
 <table class="table table-striped task-table">

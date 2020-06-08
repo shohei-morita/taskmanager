@@ -78,12 +78,11 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:theme, :content, :priority, :status, :time_limit, :user_id, label_ids:[] )
+    params.require(:task).permit(:theme, :content, :priority, :status, :time_limit, :user_id, label_ids:[])
   end
 
   def data_select
-    current_user.tasks.all
-    #select(:id, :theme, :content, :priority, :status, :time_limit, :user_id, :created_at, :updated_at)
+    current_user.tasks.select(:id, :theme, :content, :priority, :status, :time_limit, :user_id, :created_at, :updated_at)
   end
 
   def set_task

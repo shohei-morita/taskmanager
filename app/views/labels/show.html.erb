@@ -1,0 +1,12 @@
+<div class="container">
+
+  <table class="table table-task-show">
+    <tr>
+      <th>ラベル名</th>
+      <td><%= @label.label %></td>
+    </tr>
+  </table>
+
+  <%= link_to t('view.edit'), edit_label_path(@label.id), class: "btn btn-primary" %>
+  <%= link_to t('view.index'), labels_path, class: "btn btn-info" %>
+</div>

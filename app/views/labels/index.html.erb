@@ -1,0 +1,20 @@
+<%= link_to "ラベル作成", new_label_path, class:"btn btn-primary" %>
+<%= link_to "タスク一覧へ", tasks_path, class:"btn btn-info" %>
+<table class="table table-striped task-table">
+  <thead>
+    <tr>
+      <th>ラベル一覧</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @labels.each do |label| %>
+    <tr>
+      <td><%= label.label %></td>
+      <td><%= link_to t('view.show'), label_path(label.id), class: "btn btn-info" %></td>
+      <td><%= link_to t('view.edit'), edit_label_path(label.id), class: "btn btn-info" %></td>
+      <td><%= link_to t('view.destroy'), label_path(label.id), method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-danger" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+<table>

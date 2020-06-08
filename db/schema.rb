@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_031207) do
+ActiveRecord::Schema.define(version: 2020_06_08_135659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_06_07_031207) do
     t.bigint "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["task_id"], name: "index_labels_on_task_id"
   end
 
@@ -55,5 +56,6 @@ ActiveRecord::Schema.define(version: 2020_06_07_031207) do
   end
 
   add_foreign_key "labels", "tasks"
+  add_foreign_key "labels", "users"
   add_foreign_key "tasks", "users"
 end

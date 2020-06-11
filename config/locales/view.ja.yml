@@ -42,3 +42,4 @@ ja:
     user_tasks_show: タスク閲覧
     user_edit: ユーザ編集
     user_destroy: ユーザ削除
+    label_index: ラベル一覧

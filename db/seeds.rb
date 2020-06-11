@@ -14,3 +14,7 @@ User.create!(name: name2,
              password_confirmation: password,
              admin: true
 )
+
+5.times do |i|
+  Label.create!(label: "sample#{i + 1}")
+end

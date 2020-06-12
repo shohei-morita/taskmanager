@@ -1,7 +1,7 @@
-name = Faker::Games::Pokemon.name
-name2 = Faker::Games::Pokemon.name
-email = Faker::Internet.email
-email2 = Faker::Internet.email
+name = "test_user"
+name2 = "test_admin"
+email = "test@mail.com"
+email2 = "admin@mail.com"
 password = "password"
 User.create!(name: name,
              email: email,

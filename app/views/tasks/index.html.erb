@@ -3,6 +3,7 @@
   <%= link_to t('view.post_task'), new_task_path, class:"btn btn-primary" %>
   <%= link_to t('view.sort_time_limit'), tasks_path(sort_expired: "true"), class:'btn btn-info btn-links' %>
   <%= link_to t('view.sort_priority'), tasks_path(sort_priority: "true"), class:'btn btn-info btn-links' %>
+  <%= link_to "ラベル一覧", labels_path, class: "btn btn-primary" %>
 </div>
 
 <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
@@ -18,9 +19,83 @@
   </div>
 <% end %>
 
-<div><%= link_to "ラベル一覧", labels_path, class: "btn btn-primary" %></div>
-
 <div class="pagination"><%= paginate @tasks %></div>
+
+<% if @near_limit.present? %>
+  <h4>タスク終了の期限が近づいています！</h4>
+  <table class="table table-striped task-table">
+    <thead>
+      <tr>
+        <th><%= t('view.theme') %></th>
+        <th><%= t('view.content') %></th>
+        <th><%= t('view.priority') %></th>
+        <th><%= t('view.status') %></th>
+        <th><%= t('view.time_limit') %></th>
+        <th><%= t('view.post_time') %></th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @near_limit.each do |limit| %>
+      <tr>
+        <td class="task_row" ><%= limit.theme %></td>
+        <td><%= limit.content %></td>
+        <td class="priority_row"><%= t("view.#{limit.priority}") %></td>
+        <td class="status_row"><%= t("view.#{limit.status}") %></td>
+        <td><%= limit.time_limit %></td>
+        <td><%= limit.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= link_to t('view.show'), task_path(limit.id), class: "btn btn-info" %></td>
+        <td><%= link_to t('view.edit'), edit_task_path(limit.id), class: "btn btn-info" %></td>
+        <td><%= link_to t('view.destroy'), task_path(limit.id), method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-danger" %></td>
+        <td class="label_row">
+        <% limit.labels.each do |label| %>
+         <%= label.label %>
+        <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  <table>
+<% end %>
+
+
+<% if @time_over.present? %>
+  <h4>終了期限を過ぎたタスクがあります！</h4>
+  <table class="table table-striped task-table">
+    <thead>
+      <tr>
+        <th><%= t('view.theme') %></th>
+        <th><%= t('view.content') %></th>
+        <th><%= t('view.priority') %></th>
+        <th><%= t('view.status') %></th>
+        <th><%= t('view.time_limit') %></th>
+        <th><%= t('view.post_time') %></th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @time_over.each do |over| %>
+      <tr>
+        <td class="task_row" ><%= over.theme %></td>
+        <td><%= over.content %></td>
+        <td class="priority_row"><%= t("view.#{over.priority}") %></td>
+        <td class="status_row"><%= t("view.#{over.status}") %></td>
+        <td><%= over.time_limit %></td>
+        <td><%= over.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= link_to t('view.show'), task_path(over.id), class: "btn btn-info" %></td>
+        <td><%= link_to t('view.edit'), edit_task_path(over.id), class: "btn btn-info" %></td>
+        <td><%= link_to t('view.destroy'), task_path(over.id), method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-danger" %></td>
+        <td class="label_row">
+        <% over.labels.each do |label| %>
+         <%= label.label %>
+        <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  <table>
+<% end %>
+
 
 <table class="table table-striped task-table">
   <thead>

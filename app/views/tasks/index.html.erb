@@ -3,7 +3,8 @@
   <%= link_to t('view.post_task'), new_task_path, class:"btn btn-primary" %>
   <%= link_to t('view.sort_time_limit'), tasks_path(sort_expired: "true"), class:'btn btn-info btn-links' %>
   <%= link_to t('view.sort_priority'), tasks_path(sort_priority: "true"), class:'btn btn-info btn-links' %>
-  <%= link_to "ラベル一覧", labels_path, class: "btn btn-primary" %>
+  <%= link_to "新規ラベル登録", labels_path, class: "btn btn-primary" %>
+  <%= link_to "新規グループ登録", groups_path, class: "btn btn-primary" %>
 </div>
 
 <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>

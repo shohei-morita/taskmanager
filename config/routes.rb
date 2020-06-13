@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'labels/index'
-  get 'labels/new'
-  get 'labels/edit'
   root 'users#new'
   resources :tasks do
     collection do
@@ -14,4 +11,5 @@ Rails.application.routes.draw do
   end
   resources :users, only: %i(new create show)
   resources :labels
+  resources :groups
 end

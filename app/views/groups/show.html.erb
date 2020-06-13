@@ -1,0 +1,12 @@
+<div class="container">
+
+  <table class="table">
+    <tr>
+      <th>グループ名</th>
+      <td><%= @group.group_name %></td>
+    </tr>
+  </table>
+
+  <%= link_to t('view.edit'), edit_group_path(@group.id), class: "btn btn-primary" %>
+  <%= link_to t('view.index'), groups_path, class: "btn btn-info" %>
+</div>

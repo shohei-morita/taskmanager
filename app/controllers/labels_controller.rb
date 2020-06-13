@@ -41,7 +41,7 @@ class LabelsController < ApplicationController
   private
 
   def label_params
-    params.require(:label).permit(:label, :user_id, tasi_ids:[])
+    params.require(:label).permit(:label, :user_id)
   end
 
   def set_label

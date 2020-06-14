@@ -20,11 +20,18 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     redirect_to tasks_path unless @user == current_user
+    
+    @near_limit = data_select.near_limit
+    @time_over = data_select.time_over
   end
 
   private
-  
+
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+  end
+
+  def data_select
+    current_user.tasks.select(:id, :theme, :content, :priority, :status, :time_limit, :user_id, :created_at, :updated_at)
   end
 end

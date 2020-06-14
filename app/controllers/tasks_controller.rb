@@ -7,9 +7,6 @@ class TasksController < ApplicationController
     @tasks = data_select.order(time_limit: "ASC").page(params[:page]).per(10) if params[:sort_expired].present?
     @tasks = data_select.order(priority: "DESC").page(params[:page]).per(10) if params[:sort_priority].present?
 
-    @near_limit = data_select.near_limit
-    @time_over = data_select.time_over
-
     if params[:search].present?
       if params[:theme].present? && params[:status].present? && params[:label_ids].present?
         @tasks = data_select.search_theme(params[:theme]).search_status(params[:status]).search_label(params[:label_ids]).page(params[:page]).per(10)

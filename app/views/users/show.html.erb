@@ -9,4 +9,22 @@
   </tr>
 </table>
 
+<% if @near_limit.present? %>
+<h3>次のタスクの終了期限が近づいています！</h3>
+<ul>
+  <% @near_limit.each do |limit| %>
+    <li>タスク:<%= limit.theme %> 終了期限:<%= limit.time_limit %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if @time_over.present? %>
+<h3>次のタスクの終了期限が近づいています！</h3>
+<ul>
+  <% @time_over.each do |over| %>
+    <li>タスク:<%= over.theme %> 終了期限:<%= over.time_limit %></li>
+  <% end %>
+</ul>
+<% end %>
+
 <%= link_to t('view.user_to_index'), tasks_path(@user.id), class: "btn btn-info" %>

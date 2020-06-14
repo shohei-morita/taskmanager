@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :users, only: %i(new create show)
   resources :labels
   resources :groups
+  resources :group_users, only: %i(index create destroy)
 end

@@ -24,14 +24,17 @@ class GroupsController < ApplicationController
   def update
     if status_back
       redirect_to groups_path
-    elsif @group.update(task_params)
+    elsif @group.update(group_params)
       redirect_to groups_path, success: "グループの編集が完了しました"
     else
       render :edit
     end
   end
 
-  def show; end
+  def show
+    @group_user = current_user.group_users.find_by(group_id: @group.id)
+    @leader = User.find_by(id: @group.user_id)
+  end
 
   def destroy
     @group.destroy
@@ -41,11 +44,11 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:group_name, :user_id)
+    params.require(:group).permit(:group_name, :content, :user_id)
   end
 
   def set_group
-    @group = current_user.groups.find(params[:id])
+    @group = Group.find(params[:id])
   end
 
   def status_back

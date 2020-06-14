@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>グループ一覧</th>
+      <th>活動内容</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -11,9 +12,31 @@
     <% @groups.each do |group| %>
     <tr>
       <td><%= group.group_name %></td>
-      <td><%= link_to t('view.show'), group_path(group.id), class: "btn btn-info" %></td>
-      <td><%= link_to t('view.edit'), edit_group_path(group.id), class: "btn btn-info" %></td>
-      <td><%= link_to t('view.destroy'), group_path(group.id), method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-danger" %></td>
+      <td><%= group.content %></td>
+      <td>
+        <% unless group.user_id == current_user.try(:id) %>
+          <% if group.group_users.find_by(user_id: current_user.id).present? %>
+            <%= link_to "脱退する", group_user_path(id: group.group_users.ids), method: :delete, class: "btn btn-danger" %>
+          <% else %>
+            <%= link_to "参加する", group_users_path(group_id: group.id), method: :post, class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <% if group.group_users.find_by(user_id: current_user.id).present? %>
+          <%= link_to t('view.show'), group_path(group.id), class: "btn btn-info" %>
+        <% end %>
+      </td>
+      <td>
+        <% if group.user_id == current_user.try(:id) %>
+          <%= link_to t('view.edit'), edit_group_path(group.id), class: "btn btn-info" %>
+        <% end %>
+      </td>
+      <td>
+        <% if group.user_id == current_user.try(:id) %>
+          <%= link_to t('view.destroy'), group_path(group.id), method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-danger" %>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>

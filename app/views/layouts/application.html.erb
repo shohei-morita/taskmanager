@@ -4,7 +4,6 @@
     <title>Taskmanager</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -16,6 +15,7 @@
         <% if logged_in? %>
           <%= link_to "Profile", user_path(current_user.id), class: "btn btn-primary" %>
           <%= link_to "Logout", session_path(current_user.id), method: :delete, class: "btn btn-danger" %>
+          <%= link_to "参加グループ", group_users_path, class: %q(btn btn-default) %>
           <% if current_user.admin? %>
             <%= link_to "管理画面", admin_users_path, class: "btn btn-success"%>
           <% end %>
@@ -23,6 +23,9 @@
           <%= link_to "Sign up", new_user_path, class: "btn btn-primary" %>
           <%= link_to "Login", new_session_path, class: "btn btn-primary" %>
         <% end %>
+        <p>test01@gmail.com</p>
+        <p>test02@gmail.com</p>
+        <p>test03@gmail.com</p>
       </header>
       <% flash.each do |task_type, task| %>
         <div class="alert alert-<%= task_type %>"><%= task %></div>

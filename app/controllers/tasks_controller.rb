@@ -59,7 +59,6 @@ class TasksController < ApplicationController
     unless label_data.blank?
       @task.labels.build
     end
-    #@labels = Label.all
   end
 
   def update

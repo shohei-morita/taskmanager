@@ -5,8 +5,59 @@
       <th>グループ名</th>
       <td><%= @group.group_name %></td>
     </tr>
+    <tr>
+      <th>活動内容</th>
+      <td><%= @group.content %></td>
+    </tr>
   </table>
 
+  <h4>メンバータスク一覧</h4>
+  <p>グループオーナー：<%= @leader.name %>のタスク</p>
+  <table class="table">
+    <tr>
+      <th>タスク名</th>
+      <th>優先順位</th>
+      <th>ステータス</th>
+      <th>期限</th>
+    <tr>
+    <% @leader.tasks.each do |task| %>
+    <tr>
+      <td><%= task.theme %></td>
+      <td><%= t("view.#{task.priority}")   %></td>
+      <td><%= t("view.#{task.status}")   %></td>
+      <td><%= task.time_limit %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <% unless @group_user.nil? %>
+    <table class="table">
+      <tr>
+        <th>ユーザ名</th>
+        <th>タスク名</th>
+        <th>優先順位</th>
+        <th>ステータス</th>
+        <th>期限</th>
+      <tr>
+    <% @group_user.user.tasks.each do |user| %>
+      <tr>
+        <td><%= user.user.name %></td>
+        <td><%= user.theme %></td>
+        <td><%= t("view.#{user.priority}")  %></td>
+        <td><%= t("view.#{user.status}")  %></td>
+        <td><%= user.time_limit %></td>
+      </tr>
+    <% end %>
+    </table>
+  <% end %>
+
+  <% unless @group.user_id == current_user.try(:id)%>
+    <% if @group_user.present? %>
+      <%= link_to "脱退する", group_user_path(id: @group_user.id), method: :delete, class: "btn btn-danger" %>
+    <% else %>
+      <%= link_to "参加する", group_users_path(group_id: @group.id), method: :post, class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
   <%= link_to t('view.edit'), edit_group_path(@group.id), class: "btn btn-primary" %>
   <%= link_to t('view.index'), groups_path, class: "btn btn-info" %>
 </div>

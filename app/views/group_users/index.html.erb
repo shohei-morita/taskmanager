@@ -1,0 +1,7 @@
+<h4>参加グループ一覧</h4>
+<% @group_users.each do |group_user| %>
+  <% if group_user.user.id == current_user.id %>
+    <p><%= group_user.group.group_name %><p>
+    <p><%= link_to %q(Release), group_user_path(id: group_user.id), method: :delete, class: %q(btn btn-danger) %></p>
+  <% end %>
+<% end %>

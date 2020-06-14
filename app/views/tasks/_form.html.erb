@@ -30,7 +30,7 @@
   </div>
   <div class="form-group">
     <%= f.label :"ラベル一覧" %>
-    <%= collection_check_boxes(:task, :label_ids, current_user.labels.all, :id, :label) do |t| %>
+    <%= f.collection_check_boxes(:label_ids, current_user.labels.all, :id, :label) do |t| %>
      <% t.label { t.check_box + t.text } %>
     <% end %>
   </div>

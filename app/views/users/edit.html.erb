@@ -1,0 +1,36 @@
+<%= form_with(model: @user, local: true) do |f| %>
+<% if @user.errors.any? %>
+  <h2><%= @user.errors.count %>件のエラーがあります。</h2>
+  <ul>
+  <% @user.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+  <div class="form-group">
+    <p><%= f.label :Image %></p>
+    <p><%= image_tag @user.avatar.variant(resize:'100x100').processed if @user.avatar.attached? %><p>
+    <p><%= f.file_field :avatar, class: "btn btn-default" %></p>
+  </div>
+  <div class="form-group">
+    <%= f.submit "画像を削除", name: "remove_image", class: "btn btn-danger" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Email %>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :Profile %>
+    <%= f.text_area :profile, class: "form-control", rows:8 %>
+  </div>
+  <div class="form-group">
+    <p><%= f.submit "プロフィール登録", class: "btn btn-primary" %></p>
+  </div>
+<% end %>
+
+<p><%= link_to "戻る", user_path(current_user.id), name: "back", class: "btn btn-primary" %></p>

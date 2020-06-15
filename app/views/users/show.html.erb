@@ -1,4 +1,11 @@
 <table class="table table-striped">
+  <% if @user.avatar.attached? %>
+  <tr>
+    <th colspan="2">
+      <%= image_tag @user.avatar.variant(resize:'100x100').processed %>
+    </th>
+  </tr>
+  <% end %>
   <tr>
     <th><%= t('view.name') %></th>
     <td><%= @user.name %></td>
@@ -6,6 +13,10 @@
   <tr>
     <th>email</th>
     <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <th>プロフィール</th>
+    <td><%= safe_join(@user.profile.split(%Q(\n)),tag(:br)) if @user.profile.present? %></td>
   </tr>
 </table>
 
@@ -25,6 +36,11 @@
     <li>タスク:<%= over.theme %> 終了期限:<%= over.time_limit %></li>
   <% end %>
 </ul>
+<% end %>
+
+
+<% if @user.id == current_user.try(:id) %>
+  <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-info" %>
 <% end %>
 
 <%= link_to t('view.user_to_index'), tasks_path(@user.id), class: "btn btn-info" %>

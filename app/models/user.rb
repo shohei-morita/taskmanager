@@ -4,12 +4,14 @@ class User < ApplicationRecord
   has_many :groups, through: :group_users
   has_many :group_users, dependent: :destroy, source: :group
 
+  has_one_attached :avatar
+
   validates :name, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 255 },
                   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                   uniqueness: true
   before_validation { email.downcase! }
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
 
   has_secure_password
 

@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 gem 'bcrypt', '3.1.11'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'carrierwave', '~> 2.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'faker'
 gem 'kaminari'
@@ -21,7 +22,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'launchy'
 end
 

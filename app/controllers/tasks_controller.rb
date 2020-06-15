@@ -76,15 +76,10 @@ class TasksController < ApplicationController
     redirect_to tasks_path, danger: "タスクを削除しました"
   end
 
-  def confirm
-    @task = Task.new(task_params)
-    render :new if @task.invalid? || status_back
-  end
-
   private
 
   def task_params
-    params.require(:task).permit(:theme, :content, :priority, :status, :time_limit, :read_unread, :user_id, label_ids:[])
+    params.require(:task).permit(:theme, :content, :priority, :status, :image, :time_limit, :read_unread, :user_id, label_ids:[])
   end
 
   def data_select

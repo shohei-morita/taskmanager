@@ -16,4 +16,8 @@ class Task < ApplicationRecord
 
   enum status: { yet: 1, doing: 2, done: 3 }
   enum priority: { low: 1, middle: 2, high: 3 }
+
+  def start_time
+    self.time_limit
+  end
 end

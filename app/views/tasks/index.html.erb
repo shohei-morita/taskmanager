@@ -57,3 +57,12 @@
     <% end %>
   </tbody>
 <table>
+
+<%= month_calendar events: @tasks do |date, tasks| %>
+  <%= date %>
+  <% tasks.each do |task| %>
+    <div>
+      <%= task.theme %>
+    </div>
+  <% end %>
+<% end %>

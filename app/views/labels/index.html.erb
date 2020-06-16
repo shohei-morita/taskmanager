@@ -18,3 +18,5 @@
     <% end %>
   </tbody>
 <table>
+
+<%= column_chart Label.where.not(user_id: current_user.id).group(:label).count %>

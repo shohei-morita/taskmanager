@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
+gem 'aws-sdk-s3', require: false
 gem 'bcrypt', '3.1.11'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'carrierwave', '~> 2.0'
@@ -22,6 +23,7 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
@@ -41,6 +43,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'webdrivers'
+  gem 'selenium-webdriver'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

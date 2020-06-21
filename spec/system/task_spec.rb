@@ -70,7 +70,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         fill_in 'theme_search', with: task.theme
         click_on 'exec_search'
-        expect(page).to have_content( task.theme, count: 1)
+        expect(page).to have_content( task.theme, count: 2)
       end
 
       it 'ステータスで検索できる' do
@@ -107,7 +107,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         begin
           status_list = all('.status_row')
           expect(status_list[0]).to have_content '未着手'
-          expect(page).to have_content(task.theme, count: 1)
+          expect(page).to have_content(task.theme, count: 2)
         rescue Selenium::WebDriver::Error::StaleElementReferenceError
           sleep 1
           retry
@@ -225,7 +225,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it 'ラベルを編集できる' do
         visit labels_path
         click_on '編集', match: :first
-        fill_in 'label_edit', with: 'label-sample2'
+        fill_in 'label_create', with: 'label-sample2'
         click_on 'post'
         expect(page).to have_content 'label-sample2'
       end

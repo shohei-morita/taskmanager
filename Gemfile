@@ -33,7 +33,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'letter_opener_web'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -44,6 +43,10 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'webdrivers'
   gem 'selenium-webdriver'
+end
+
+group :development, :production, :test do
+  gem 'letter_opener_web'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -12,7 +12,7 @@ gem 'dotenv-rails'
 gem 'faker'
 gem 'kaminari'
 gem 'mini_magick'
-gem 'mini_racer', platforms: :ruby 
+gem 'mini_racer', platforms: :ruby
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.4'
@@ -40,6 +40,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bcrypt_pbkdf'
+  gem 'ed25519'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

@@ -8,9 +8,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'carrierwave', '~> 2.0'
 gem "chartkick"
 gem 'coffee-rails', '~> 4.2'
+gem 'dotenv-rails'
 gem 'faker'
 gem 'kaminari'
 gem 'mini_magick'
+gem 'mini_racer', platforms: :ruby 
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.4'
@@ -20,10 +22,15 @@ gem 'simple_calendar'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.5'
+gem 'unicorn'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'dotenv-rails'
+  gem 'capistrano', '3.6.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
